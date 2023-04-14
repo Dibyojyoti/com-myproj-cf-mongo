@@ -17,6 +17,6 @@ public class  MongoDBDetails{
     Objects.requireNotNull( <field>, " <field> must not be null");
     this.<field> = <field>;
   }
-  //getters
+  //add getters
   public String getDbUrl() {return "jdbc:postgresql://" + dbHost + ":" + dbPort + "/" + dbName;}
 }
