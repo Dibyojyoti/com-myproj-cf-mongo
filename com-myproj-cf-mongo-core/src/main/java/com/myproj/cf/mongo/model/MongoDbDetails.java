@@ -12,7 +12,7 @@ public class  MongoDBDetails{
   private String uri;
 
 
-  public   PgDbDetails( String dbInstanceName,  String dbPlan, String dbName ,String dbRole , 
+  public   MongoDBDetails( String dbInstanceName,  String dbPlan, String dbName ,String dbRole , 
                                      String dbPort, String dbUsername, String dbPassword, String uri) {
     Objects.requireNotNull( <field>, " <field> must not be null");
     this.<field> = <field>;
