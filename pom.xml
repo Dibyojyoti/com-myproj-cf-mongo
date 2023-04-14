@@ -8,7 +8,10 @@
     <version>2023.1.1</version>
 	<packaging>pom</packaging>
 	<parent>
-	...
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-parent</artifactId>
+	    <version>2.2.6.RELEASE</version>
+	    <relativePath/>
 	</parent>
 	<modules>
 	    <module>com-myproj-cf-mongo-core</module>
