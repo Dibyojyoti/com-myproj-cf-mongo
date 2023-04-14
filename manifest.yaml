@@ -1,0 +1,11 @@
+---
+applications:
+- name:  com-myproj-cf-mongo
+  memory: 1G
+  path: cf/target/com-myproj-cf-mongo-cf.war
+  env:
+    LOGGING_LEVEL: debug
+  routes:
+  - route:  com-myproj-cf-mongo-cf.war.<domain>
+services:
+- DIBYO-MONGODB
