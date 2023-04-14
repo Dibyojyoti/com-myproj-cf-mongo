@@ -11,7 +11,7 @@
 	...
 	</parent>
 	<modules>
-	    <module>com-myproj-cf-mongo-code</module>
+	    <module>com-myproj-cf-mongo-core</module>
 	    <module>com-myproj-cf-mongo-cf</module>
 	</modules>
 </project>
