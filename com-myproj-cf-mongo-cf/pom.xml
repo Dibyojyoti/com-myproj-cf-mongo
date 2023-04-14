@@ -6,7 +6,8 @@
   <groupId>com.myproj.cf.mongo</groupId>
   <artifactId>com-myproj-cf-mongo-cf</artifactId>
   <version>2023.1.1</version>
-  <packaging>jar</packaging>
+  <!--packaging>jar</packaging-->
+  <packaging>war</packaging>	
 
   <parent>
 	<groupId>org.springframework.boot</groupId>
@@ -16,6 +17,20 @@
   </parent>
   
   <dependencies>
+	<dependency>
+		<groupId>com.myproj.cf.mongo</groupId>
+		<artifactId>com-myproj-cf-mongo-core</artifactId>
+		<version>${project.version}</version>
+	</dependency>
+
+	<!--Test-->
+	<dependency>
+		<groupId>com.myproj.cf.mongo</groupId>
+		<artifactId>com-myproj-cf-mongo-core</artifactId>
+		<version>${project.version}</version>
+		<type>test-jar</type>
+		<scope>test</scope>
+	</dependency>	
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter</artifactId>
@@ -27,72 +42,48 @@
 	</dependency>
   </dependencies>
   <properties>
-			<spring.boot.mainclass>com.myproj.cf.mongo.App</spring.boot.mainclass>
-	</properties>
+	<spring.boot.mainclass>com.myproj.cf.mongo.App</spring.boot.mainclass>
+  </properties>
   <build>
-    <plugins>
-        <plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-jar-plugin</artifactId>
-		<executions>
-			<execution>
-				<id>Jar Tests Package</id>
-				<phase>package</phase>
-				<goals>
-					<goal>test-jar</goal>
-				</goals>
-			</execution>
-		</executions>
-        </plugin>
-	<plugin>
-		<groupId>org.codehaus.mojo</groupId>
-		<artifactId>cobertura-maven-plugin</artifactId>
-		<version>2.7</version>
-		<configuration>
-			<formats>
-				<format>html</format>
-				<format>xml</format>
-			</formats>
-		</configuration>
-		<executions>
-			<execution>
-				<goals>
-					<goal>cobertura</goal>
-				</goals>
-				<phase>test</phase>
-			</execution>
-		</executions>
-	</plugin>
-     	<plugin>
-		<groupId>pl.project13.maven</groupId>
-		<artifactId>git-commit-id-plugin</artifactId>
-		<executions>
-			<execution>
-				<id>get-the-git-infos</id>
-				<goals>
-					<goal>revision</goal>
-				</goals>
-			</execution>
-		</executions>
-		<configuration>
-			<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-			<prefix>git</prefix>
-			<verbose>false</verbose>
-			<generateGitPropertiesFile>true</generateGitPropertiesFile>
-			<!--   <runOnlyOnce>true</runOnlyOnce>  -->
-			<generateGitPropertiesFilename>${project.basedir}/src/main/resources/git.properties</generateGitPropertiesFilename> 
-			<includeOnlyProperties>    
-				<includeOnlyProperty>git.build.version</includeOnlyProperty>
-				<includeOnlyProperty>git.build.time</includeOnlyProperty>
-				<includeOnlyProperty>git.commit.id</includeOnlyProperty>
-			</includeOnlyProperties>	
-			<gitDescribe>
-				<skip>false</skip>
-				<always>false</always>
-				<dirty>-dirty</dirty>
-			</gitDescribe>
-		</configuration>
-	</plugin>	
-    </plugins>  
+	<finalName>${project.artifactId}</finalName>
+	<resources>
+		<resource>
+			<directory>src/main/resources</directory>
+			<filtering>true</filtering>
+		</resource>
+	</resources>
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+		</plugin>
+		<!-- Build Info -->
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+		</plugin>
+		<!-- Git Commit Info -->
+		<plugin>
+			<groupId>pl.project13.maven</groupId>
+			<artifactId>git-commit-id-plugin</artifactId>
+			<executions>
+				<execution>
+					<goals>
+						<goal>revision</goal>
+					</goals>
+				</execution>
+			</executions>
+			<configuration>
+				<includeOnlyProperties>
+					<includeOnlyProperty>^git.branch$</includeOnlyProperty>
+					<includeOnlyProperty>^git.commit.id$</includeOnlyProperty>
+					<includeOnlyProperty>^git.commit.time$</includeOnlyProperty>
+					<includeOnlyProperty>^git.build.time</includeOnlyProperty>
+				</includeOnlyProperties>
+				<generateGitPropertiesFile>true</generateGitPropertiesFile>
+				<failOnNoGitDirectory>false</failOnNoGitDirectory>
+			</configuration>
+		</plugin>
+	</plugins>
   </build>
 </project>
